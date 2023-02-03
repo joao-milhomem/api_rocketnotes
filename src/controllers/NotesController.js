@@ -71,10 +71,17 @@ class NotesController {
         .orderBy("title");
     }
 
-    const allUserTags = await knex("tags").where({ user_id })
-   
+    const allUserTags = await knex("tags").where({ user_id });
+    const NoteWithTags = notes.map((note) => {
+      const filteredTags = allUserTags.filter((tag) => tag.note_id === note.id);
 
-    return response.json(notes);
+      return {
+        ...note,
+        tags: filteredTags,
+      };
+    });
+
+    return response.json(NoteWithTags);
   }
 
   async delete(request, response) {
