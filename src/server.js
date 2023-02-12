@@ -9,7 +9,7 @@ const PORT = 3333;
 const appRouter = require("./routes");
 
 migrations();
-
+  
 app.listen(PORT, () =>
   console.log(`Server listening on http://localhost:${PORT}`)
 );
