@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const PORT = 3333;
 const appRouter = require("./routes");
+const { UPLOADS_FOLDER } = require("./configs/uploads");
 
 migrations();
   
@@ -15,7 +16,9 @@ app.listen(PORT, () =>
 );
 
 app.use(express.json());
+app.use(express.static(UPLOADS_FOLDER))
 app.use(appRouter);
+
 
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {
