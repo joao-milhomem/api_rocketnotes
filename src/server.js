@@ -8,17 +8,17 @@ const app = express();
 const PORT = 3333;
 const appRouter = require("./routes");
 const { UPLOADS_FOLDER } = require("./configs/uploads");
+const cors = require("cors");
 
 migrations();
-  
+
 app.listen(PORT, () =>
   console.log(`Server listening on http://localhost:${PORT}`)
 );
-
+app.use(cors());
 app.use(express.json());
-app.use(express.static(UPLOADS_FOLDER))
+app.use(express.static(UPLOADS_FOLDER));
 app.use(appRouter);
-
 
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {
