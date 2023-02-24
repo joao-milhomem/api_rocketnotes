@@ -17,7 +17,7 @@ app.listen(PORT, () =>
 );
 app.use(cors());
 app.use(express.json());
-app.use(express.static(UPLOADS_FOLDER));
+app.use("/files", express.static(UPLOADS_FOLDER));
 app.use(appRouter);
 
 app.use((error, request, response, next) => {
